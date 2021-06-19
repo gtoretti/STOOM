@@ -6,7 +6,7 @@ public class AddressRequest {
     private String streetName;
     private String number;
     private String complement;
-	private String neighbourhood;
+    private String neighbourhood;
     private String city;
     private String state;
     private String country;

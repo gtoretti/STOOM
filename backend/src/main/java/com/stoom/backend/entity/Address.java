@@ -9,12 +9,12 @@ import javax.persistence.Id;
 @Entity(name = "ADDRESS") 
 public class Address {
 
-	@Id
+    @Id
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-	@Column(name="STREET_NAME", nullable = false)
+    @Column(name="STREET_NAME", nullable = false)
     private String streetName;
 
     @Column(name="NUMBER", nullable = false)
@@ -23,8 +23,8 @@ public class Address {
     @Column(name="COMPLEMENT", nullable = true)
     private String complement;
 
-	@Column(name="NEIGHBOURHOOD", nullable = false)
-	private String neighbourhood;
+    @Column(name="NEIGHBOURHOOD", nullable = false)
+    private String neighbourhood;
 
     @Column(name="CITY", nullable = false)
     private String city;
@@ -44,91 +44,91 @@ public class Address {
     @Column(name="LONGITUDE", nullable = true)
     private String longitude;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getStreetName() {
-		return streetName;
-	}
+    public String getStreetName() {
+        return streetName;
+    }
 
-	public void setStreetName(String streetName) {
-		this.streetName = streetName;
-	}
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
 
-	public String getNumber() {
-		return number;
-	}
+    public String getNumber() {
+        return number;
+    }
 
-	public void setNumber(String number) {
-		this.number = number;
-	}
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-	public String getComplement() {
-		return complement;
-	}
+    public String getComplement() {
+        return complement;
+    }
 
-	public void setComplement(String complement) {
-		this.complement = complement;
-	}
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
 
-	public String getNeighbourhood() {
-		return neighbourhood;
-	}
+    public String getNeighbourhood() {
+        return neighbourhood;
+    }
 
-	public void setNeighbourhood(String neighbourhood) {
-		this.neighbourhood = neighbourhood;
-	}
+    public void setNeighbourhood(String neighbourhood) {
+        this.neighbourhood = neighbourhood;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	public String getZipcode() {
-		return zipcode;
-	}
+    public String getZipcode() {
+        return zipcode;
+    }
 
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
 
-	public String getLatitude() {
-		return latitude;
-	}
+    public String getLatitude() {
+        return latitude;
+    }
 
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 
-	public String getLongitude() {
-		return longitude;
-	}
+    public String getLongitude() {
+        return longitude;
+    }
 
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
-	}
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 }
