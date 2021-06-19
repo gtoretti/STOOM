@@ -47,13 +47,13 @@ curl http://localhost:8080/address
   
 ---------------------------------------------------------------------------------------
 
-List one per id test:
+List per id test:
 
 curl http://localhost:8080/address/#{id}
 
 ---------------------------------------------------------------------------------------
 
-Update test:
+Update by id test:
 
 curl --header "Content-Type: application/json" 
   --request PUT 
@@ -62,7 +62,7 @@ curl --header "Content-Type: application/json"
 
 ---------------------------------------------------------------------------------------
 
-Delete test:
+Delete by id test:
 
 curl -X DELETE http://localhost:8080/address/#{id}
 
