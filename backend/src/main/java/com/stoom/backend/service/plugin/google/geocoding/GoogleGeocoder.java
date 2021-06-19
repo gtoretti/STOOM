@@ -46,9 +46,13 @@ public class GoogleGeocoder implements Geocoder {
 				if (results.size()>0) {
 					Map result = (Map)results.get(0);
 					Map geometry = (Map)result.get("geometry");
-					Map location = (Map)geometry.get("location");
-					address.setLatitude(location.get("lat").toString());
-					address.setLongitude(location.get("lng").toString());
+					if (geometry!=null) {
+						Map location = (Map)geometry.get("location");
+						if (location!=null) {
+							address.setLatitude(location.get("lat").toString());
+							address.setLongitude(location.get("lng").toString());
+						}
+					}
 				}
 			}else
 				throw new Exception("Error on Google Geodecoding service:" + addressMap.get("status"));
