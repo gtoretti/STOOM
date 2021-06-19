@@ -8,13 +8,19 @@ import org.springframework.stereotype.Service;
 import com.stoom.backend.entity.Address;
 import com.stoom.backend.repository.AddressRepository;
 
+import com.stoom.backend.service.plugin.Geocoder;
+
 @Service
 public class AddressService {
 
     @Autowired
     private AddressRepository repository;
+    
+    @Autowired
+    private Geocoder geocoder;
  
-    public Address create(Address address) {
+    public Address create(Address address) throws Exception {
+    	geocoder.validate(address);
         return repository.save(address);
     }
  
@@ -34,7 +40,8 @@ public class AddressService {
         return repository.findById(id);
     }
  
-    public Address update(Address address) {
+    public Address update(Address address) throws Exception {
+    	geocoder.validate(address);
     	return repository.save(address);
     }
 }

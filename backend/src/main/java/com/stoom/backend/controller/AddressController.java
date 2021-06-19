@@ -17,7 +17,7 @@ public class AddressController {
     private AddressService addressService;
 
     @PostMapping
-    public Address create(@RequestBody AddressRequest addressRequest){
+    public Address create(@RequestBody AddressRequest addressRequest) throws Exception {
     	Address address = new Address();
     	address.setStreetName(addressRequest.getStreetName());
     	address.setNumber(addressRequest.getNumber());
@@ -43,7 +43,7 @@ public class AddressController {
     }
 
     @PutMapping
-    public Address update(@RequestBody AddressRequest addressRequest){
+    public Address update(@RequestBody AddressRequest addressRequest) throws Exception {
     	Address address = new Address();
     	address.setId(addressRequest.getId());
     	address.setStreetName(addressRequest.getStreetName());
