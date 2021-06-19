@@ -2,7 +2,7 @@
 
 Instructions for building and running on Linux (java-8-openjdk-amd64):
 
-1.Edit backend/test-configuration.env with your database params and google Geocoder key.
+1.Edit backend/test-configuration.env with your database params and google Geocoder key. (MariaDB preferred)
 
 2.Execute following commands:
 
