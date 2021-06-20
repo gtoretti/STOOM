@@ -1,0 +1,23 @@
+FROM openjdk:8u212-jdk-alpine3.9
+
+RUN mkdir /opt/microservices/
+
+ADD build/libs/backend-0.0.1-SNAPSHOT.jar /opt/microservices/
+RUN adduser -D docker
+RUN chown -R docker.docker /opt/microservices/ &&\
+    chmod -R 775 /opt/microservices/
+
+EXPOSE 8080
+WORKDIR /opt/microservices
+
+USER docker
+
+#localhost container configuration
+ENV DB_URL=jdbc:mysql://172.17.0.2:3306/STOOM
+ENV DB_USER=root
+ENV DB_PASS=mypass
+ENV DB_DRIVER=org.mariadb.jdbc.Driver
+ENV GEO_KEY=
+
+
+ENTRYPOINT ["java", "-jar", "backend-0.0.1-SNAPSHOT.jar"]

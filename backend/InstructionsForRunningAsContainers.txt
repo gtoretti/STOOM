@@ -1,0 +1,76 @@
+INSTRUCTIONS FOR TESTING API AND DB USING CONTAINERS:
+
+    cd backend
+    ./gradlew clean
+    ./gradlew build -x test
+
+    docker run --name mariadbtest -e MYSQL_DATABASE=STOOM -e MYSQL_ROOT_PASSWORD=mypass docker.io/library/mariadb:10.4
+
+Confirm DB container IP running this:
+
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mariadbtest
+
+Confirm DB IP is correct at Dockerfile.local (in my case 172.17.0.2), inform GEO_KEY (Google Geocoder key) at Dockerfile.local and run:
+
+    docker build -t stoom:1.0 -f Dockerfile.local .
+
+    docker run --name stoomaddress stoom:1.0
+    
+Confirm stoomaddress container IP running this:    
+    
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' stoomaddress
+    
+Test the API using stoomaddress container IP (in my case 172.17.0.3)
+
+Stop containers and remove them
+
+    docker stop mariadbtest
+    docker rm mariadbtest
+    docker stop stoomaddress
+    docker rm stoomaddress
+
+
+---------------------------------------------------------------------------------------
+TESTS USING CONTAINER IP:
+---------------------------------------------------------------------------------------
+List all: (open in browser: http://172.17.0.3:8080/address)
+
+curl http://172.17.0.3:8080/address
+
+---------------------------------------------------------------------------------------
+  
+Insert Test with values on latitude/longitude:
+
+curl --header "Content-Type: application/json" --request POST --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"80000","longitude":"50000" }' http://172.17.0.3:8080/address  
+  
+---------------------------------------------------------------------------------------
+  
+Insert Test with empty latitude/longitude:
+
+curl --header "Content-Type: application/json" --request POST --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"","longitude":"" }' http://172.17.0.3:8080/address
+
+
+---------------------------------------------------------------------------------------
+
+List per id test:
+
+curl http://172.17.0.3:8080/address/#{id}
+
+---------------------------------------------------------------------------------------
+
+Update by id test:
+
+curl --header "Content-Type: application/json" --request PUT --data '{"id":1,"streetName":"Av. Brasil","number":"7777","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"4345345","longitude":"345345435" }' http://172.17.0.3:8080/address
+
+---------------------------------------------------------------------------------------
+
+Delete by id test:
+
+curl -X DELETE http://172.17.0.3:8080/address/#{id} 
+
+---------------------------------------------------------------------------------------
+
+
+    
+    
+
