@@ -11,11 +11,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Value("${security.username}")
-	private String userAPI; 
+    @Value("${security.username}")
+    private String userAPI; 
 
-	@Value("${security.password}")
-	private String password;
+    @Value("${security.password}")
+    private String password;
 
     @Bean
     public UserDetailsService userDetailsService() {
