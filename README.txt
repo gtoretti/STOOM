@@ -50,20 +50,14 @@ docker stop mariadbtest
 
 Insert Test with empty latitude/longitude:
 
-curl --header "Content-Type: application/json"
-  --request POST
-  --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"","longitude":"" }' 
-  http://localhost:8080/address
+curl --header "Content-Type: application/json" --request POST --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"","longitude":"" }' http://localhost:8080/address
 
 
 ---------------------------------------------------------------------------------------
   
 Insert Test with values on latitude/longitude:
 
-curl --header "Content-Type: application/json"
-  --request POST
-  --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"80000","longitude":"50000" }' 
-  http://localhost:8080/address  
+curl --header "Content-Type: application/json" --request POST --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"80000","longitude":"50000" }'   http://localhost:8080/address  
   
 ---------------------------------------------------------------------------------------
   
@@ -81,10 +75,7 @@ curl http://localhost:8080/address/#{id}
 
 Update by id test:
 
-curl --header "Content-Type: application/json" 
-  --request PUT 
-  --data '{"id":1,"streetName":"Av. Brasil","number":"7777","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"4345345","longitude":"345345435" }' 
-  http://localhost:8080/address
+curl --header "Content-Type: application/json"  --request PUT --data '{"id":1,"streetName":"Av. Brasil","number":"7777","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"4345345","longitude":"345345435" }'  http://localhost:8080/address
 
 ---------------------------------------------------------------------------------------
 
