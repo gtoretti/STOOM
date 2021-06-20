@@ -1,6 +1,5 @@
 service nginx status
 
-
 check configuration file:
 sudo nginx -t
 
