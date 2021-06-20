@@ -22,7 +22,7 @@ DB_PASS=mypass
 DB_DRIVER=org.mariadb.jdbc.Driver
 
 
-1.Using a separated command window, execute following commands and export your DB configuration:
+1.Using a separated command window, execute following commands to build, export your DB configuration and start API:
 
 cd backend
 ./gradlew clean
@@ -39,7 +39,7 @@ java -jar build/libs/backend-0.0.1-SNAPSHOT.jar
 
 2.Test the API.
 
-3.After finished, stop the SpringBoot API with Ctrl+C and if used MariaDB container, stop it with the following command:
+3.After finished, stop the API with Ctrl+C and if used MariaDB container, stop it with the following command:
 
 docker stop mariadbtest
 
