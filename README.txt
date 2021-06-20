@@ -39,9 +39,10 @@ java -jar build/libs/backend-0.0.1-SNAPSHOT.jar
 
 2.Test the API.
 
-3.After finished, stop the API with Ctrl+C and if used MariaDB container, stop it with the following command:
+3.After finished, stop the API with Ctrl+C and if used MariaDB container, stop and remove it with the following commands:
 
 docker stop mariadbtest
+docker rm mariadbtest
 
 
 # Testing the API
