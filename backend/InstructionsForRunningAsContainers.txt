@@ -1,28 +1,32 @@
 INSTRUCTIONS FOR TESTING API AND DB USING CONTAINERS:
 
+1.Build jar:
+
     cd backend
     ./gradlew clean
     ./gradlew build -x test
 
+2.Start DB as container:
+
     docker run --name mariadbtest -e MYSQL_DATABASE=STOOM -e MYSQL_ROOT_PASSWORD=mypass docker.io/library/mariadb:10.4
 
-Confirm DB container IP running this:
+3.Confirm DB container IP running this:
 
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mariadbtest
 
-Confirm DB IP is correct at Dockerfile.local (in my case 172.17.0.2), inform GEO_KEY (Google Geocoder key) at Dockerfile.local and run:
+4.Confirm DB container IP is correct at Dockerfile.local (in my case 172.17.0.2), inform GEO_KEY (Google Geocoder key) at Dockerfile.local and run:
 
     docker build -t stoom:1.0 -f Dockerfile.local .
 
     docker run --name stoomaddress stoom:1.0
     
-Confirm stoomaddress container IP running this:    
+5.Confirm stoomaddress container IP:    
     
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' stoomaddress
     
-Test the API using stoomaddress container IP (in my case 172.17.0.3)
+6.Test the API using stoomaddress container IP (in my case 172.17.0.3)
 
-Stop containers and remove them
+7.Stop containers and remove them
 
     docker stop mariadbtest
     docker rm mariadbtest
