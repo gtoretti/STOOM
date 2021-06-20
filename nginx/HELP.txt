@@ -1,0 +1,10 @@
+service nginx status
+
+
+check configuration file:
+sudo nginx -t
+
+/etc/nginx/nginx.conf
+
+executing as container:
+docker run --name mynginx2 --mount source=nginx/conf,target=/etc/nginx/conf,readonly -p 80:80 nginx
