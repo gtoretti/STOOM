@@ -21,7 +21,6 @@ DB_USER=root
 DB_PASS=mypass
 DB_DRIVER=org.mariadb.jdbc.Driver
 
-
 1.Using a separated command window, execute following commands and export your DB configuration:
 
 cd backend
@@ -33,6 +32,9 @@ export DB_USER=root
 export DB_PASS=mypass
 export DB_DRIVER=org.mariadb.jdbc.Driver
 export GEO_KEY=putHereTheGoogleGeocodingAPIkey
+
+export SEC_USERNAME=apiuser
+export SEC_PASSWORD=passwrd
 
 java -jar build/libs/backend-0.0.1-SNAPSHOT.jar
 
@@ -50,47 +52,37 @@ docker stop mariadbtest
 
 Insert Test with empty latitude/longitude:
 
-curl --header "Content-Type: application/json"
-  --request POST
-  --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"","longitude":"" }' 
-  http://localhost:8080/address
+curl --header "Content-Type: application/json" --request POST --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"","longitude":"" }' http://localhost:8080/address -u apiuser:passwrd
 
 
 ---------------------------------------------------------------------------------------
   
 Insert Test with values on latitude/longitude:
 
-curl --header "Content-Type: application/json"
-  --request POST
-  --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"80000","longitude":"50000" }' 
-  http://localhost:8080/address  
+curl --header "Content-Type: application/json" --request POST --data '{"streetName":"Av. Brasil","number":"9087","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"80000","longitude":"50000" }' http://localhost:8080/address -u apiuser:passwrd  
   
 ---------------------------------------------------------------------------------------
   
 List all: (open in browser: http://localhost:8080/address)
 
-curl http://localhost:8080/address 
+curl http://localhost:8080/address -u apiuser:passwrd 
   
 ---------------------------------------------------------------------------------------
 
 List per id test:
 
-curl http://localhost:8080/address/#{id}
+curl http://localhost:8080/address/#{id} -u apiuser:passwrd
 
 ---------------------------------------------------------------------------------------
 
 Update by id test:
 
-curl --header "Content-Type: application/json" 
-  --request PUT 
-  --data '{"id":1,"streetName":"Av. Brasil","number":"7777","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"4345345","longitude":"345345435" }' 
-  http://localhost:8080/address
+curl --header "Content-Type: application/json" --request PUT --data '{"id":1,"streetName":"Av. Brasil","number":"7777","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"4345345","longitude":"345345435" }' http://localhost:8080/address -u apiuser:passwrd
 
 ---------------------------------------------------------------------------------------
 
 Delete by id test:
 
-curl -X DELETE http://localhost:8080/address/#{id}
+curl -X DELETE http://localhost:8080/address/#{id} -u apiuser:passwrd
 
 
-  
