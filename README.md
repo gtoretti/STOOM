@@ -2,9 +2,30 @@
 
 Instructions for building and running on Linux (java-8-openjdk-amd64):
 
-1.Edit backend/test-configuration.env with your database params and google Geocoder key. (MariaDB preferred)
+If you have a DB available, move to step 1.
 
-2.Execute following commands:
+If you don't have a DB available for local tests, execute MariaDB as container by the following command (user=root, password=mypass):
+
+docker run --name mariadbtest -e MYSQL_DATABASE=STOOM -e MYSQL_ROOT_PASSWORD=mypass docker.io/library/mariadb:10.4
+
+
+Next, execute the following command to retrieve the MariaDB IP to connect from outside the container:
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mariadbtest
+
+
+The DB configuration in this case is the following:
+
+DB_URL=jdbc:mysql://172.17.0.2:3306/STOOM
+
+DB_USER=root
+
+DB_PASS=mypass
+
+DB_DRIVER=org.mariadb.jdbc.Driver
+
+
+1.Using a separated command window, execute following commands and export your DB configuration:
 
 cd backend
 
@@ -12,11 +33,25 @@ cd backend
 
 ./gradlew build -x test
 
-source test-configuration.env
+export DB_URL=jdbc:mysql://172.17.0.2:3306/STOOM
+
+export DB_USER=root
+
+export DB_PASS=mypass
+
+export DB_DRIVER=org.mariadb.jdbc.Driver
+
+export GEO_KEY=putHereTheGoogleGeocodingAPIkey
+
 
 java -jar build/libs/backend-0.0.1-SNAPSHOT.jar
 
-3.Test the API.
+2.Test the API.
+
+3.After finished, stop the SpringBoot API with Ctrl+C and if used MariaDB container, stop it with the following command:
+
+docker stop mariadbtest
+
 
 # Testing the API
 
@@ -57,7 +92,7 @@ Update by id test:
 
 curl --header "Content-Type: application/json" 
   --request PUT 
-  --data '{"id":17,"streetName":"Av. Brasil","number":"7777","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"4345345","longitude":"345345435" }' 
+  --data '{"id":1,"streetName":"Av. Brasil","number":"7777","complement":"Ap 10","neighbourhood":"Centro","city":"Sao Paulo","state":"Sao Paulo","country":"Brasil","zipcode":"00000-000","latitude":"4345345","longitude":"345345435" }' 
   http://localhost:8080/address
 
 ---------------------------------------------------------------------------------------
