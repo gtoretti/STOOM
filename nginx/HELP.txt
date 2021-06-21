@@ -1,9 +1,5 @@
-service nginx status
+INSTRUCTIONS FOR API PROTECTION (HTTPS / TOKEN AUTHENTICATION)
 
-check configuration file:
-sudo nginx -t
+docker run -it --rm -p 8080:80 --name stoomweb -v conf:/etc/nginx nginx
 
-/etc/nginx/nginx.conf
-
-executing as container:
-docker run --name mynginx2 --mount source=nginx/conf,target=/etc/nginx/conf,readonly -p 80:80 nginx
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' stoomweb
