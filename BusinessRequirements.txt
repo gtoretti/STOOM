@@ -1,0 +1,31 @@
+Backend STOOM
+
+Create in the REST pattern, a CRUD (Create, Read, Update, Delete) of an address entity with the following attributes:
+
+id*
+streetName*
+number*
+complement
+neighbourhood*
+city*
+state*
+country*
+zipcode*
+latitude
+longitude
+
+* required attributes
+
+
+
+1- You must use Java to create this CRUD. The framework may be what you feel most comfortable with.
+
+2- You must create a public repository on github to share the microservice and send it to the examiner on completion.
+
+3- When latitude and longitude are not informed, the system needs to search for this information using Google's Geocoding API (https://developers.google.com/maps/documentation/geocoding/start)
+(Use the temporary key sent by email)
+
+4- Create a working Dockerfile with the project
+
+5- Create at least one basic unit test for each action (Create, Read, Update, Delete).
+
