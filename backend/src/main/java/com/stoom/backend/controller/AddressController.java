@@ -42,20 +42,9 @@ public class AddressController {
     	address.setLatitude(addressRequest.getLatitude());
     	address.setLongitude(addressRequest.getLongitude());
     	
-    	//Kaftka producer
-    	this.template.send("address-topic-create", address);
-        
-    	return addressService.create(address);
-    }
-
-    @GetMapping(path = {"/{id}"})
-    public Address findOne(@PathVariable("id") Integer id){
-        return addressService.findById(id);
-    }
-
-    @GetMapping
-    public List<Address> findAll(){
-        return addressService.findAll();
+    	this.template.send("createUpdateAdress", address); //kafka producer version
+    	//return addressService.create(address);  //without kafka version
+    	return address;
     }
 
     @PutMapping
@@ -72,19 +61,28 @@ public class AddressController {
     	address.setZipcode(addressRequest.getZipcode());
     	address.setLatitude(addressRequest.getLatitude());
     	address.setLongitude(addressRequest.getLongitude());
-    	
-    	//Kaftka producer
-    	this.template.send("address-topic-update", address);
-    	
-    	return addressService.create(address);
+
+    	this.template.send("createUpdateAdress", address); //Kaftka producer version
+    	//return addressService.create(address); //without kafka version
+    	return address;
     }
 
     @DeleteMapping(path ={"/{id}"})
     public Address delete(@PathVariable("id") Integer id) {
-    	
-    	//Kaftka producer
-    	this.template.send("address-topic-delete", id);
-    	
-        return addressService.delete(id);
+    	Address address = findOne(id);
+    	this.template.send("deleteAddress", id); //Kaftka producer version
+        // return addressService.delete(id); //without kafka version
+    	return address;
+    }    
+    
+    @GetMapping(path = {"/{id}"})
+    public Address findOne(@PathVariable("id") Integer id){
+        return addressService.findById(id);
     }
+
+    @GetMapping
+    public List<Address> findAll(){
+        return addressService.findAll();
+    }
+
 }

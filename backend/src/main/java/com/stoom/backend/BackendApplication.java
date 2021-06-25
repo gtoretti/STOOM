@@ -16,6 +16,11 @@ import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
 import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
 import org.springframework.kafka.support.converter.RecordMessageConverter;
 import org.springframework.kafka.support.converter.StringJsonMessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.stoom.backend.service.AddressService;
+import com.stoom.backend.entity.Address;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -26,36 +31,36 @@ public class BackendApplication {
 
 	private final Logger logger = LoggerFactory.getLogger(BackendApplication.class);
 	
-	//kafta consuming: only logging as example
-	private final TaskExecutor exec = new SimpleAsyncTaskExecutor();
+    @Autowired
+    private AddressService addressService;
 	
+    ObjectMapper objectMapper = new ObjectMapper();
+    
 	@Bean
-	public NewTopic addressTopicCreate() {
-		return new NewTopic("address-topic-create", 1, (short) 1);
+	public NewTopic createAdressTopic() {
+		return new NewTopic("createAdress", 1, (short) 1);
 	}
 	
-	@KafkaListener(id = "create-group", topics = "address-topic-create")
-	public void createListen(String in) {
-		logger.info("Kafka received Created Address: " + in);
+	@Bean
+	public NewTopic updateAddressTopic() {
+		return new NewTopic("updateAddress", 1, (short) 1);
+	}
+	
+	@KafkaListener(id = "createUpdateAdress", topics = "createUpdateAdress")
+	public void createListen(String json) throws Exception {
+		Address address = objectMapper.readValue(json, Address.class);
+		addressService.create(address);
+		logger.info("Kafka Created Address: " + address);
     }
 
 	@Bean
-	public NewTopic addressTopicUpdate() {
-		return new NewTopic("address-topic-update", 1, (short) 1);
+	public NewTopic deleteAddressTopic() {
+		return new NewTopic("deleteAddress", 1, (short) 1);
 	}
 
-	@KafkaListener(id = "update-group", topics = "address-topic-update")
-	public void updateListen(String in) {
-		logger.info("Kafka received Updated Address: " + in);
-    }	
-
-	@Bean
-	public NewTopic addressTopicDelete() {
-		return new NewTopic("address-topic-delete", 1, (short) 1);
-	}
-
-	@KafkaListener(id = "delete-group", topics = "address-topic-delete")
-	public void deleteListen(String in) {
-		logger.info("Kafka received Deleted Address: " + in);
+	@KafkaListener(id = "deleteAddress", topics = "deleteAddress")
+	public void deleteListen(String id) throws Exception {
+		addressService.delete(Integer.parseInt(id));
+		logger.info("Kafka Deleted Address Id: " + id);		
     }	
 }
