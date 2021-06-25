@@ -90,3 +90,11 @@ curl -X DELETE http://localhost:8080/address/#{id}
 
 
   
+
+
+
+
+Additional reference: if you need pagination, use this reference: https://www.baeldung.com/spring-data-jpa-pagination-sorting
+
+
+
