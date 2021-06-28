@@ -23,7 +23,7 @@ public class Address {
     @Column(name="NUMBER", nullable = false)
     @Getter @Setter private String number;
 
-    @Column(name="COMPLEMENT", nullable = true)
+    @Column(name="COMPLEMENT")
     @Getter @Setter private String complement;
 
     @Column(name="NEIGHBOURHOOD", nullable = false)

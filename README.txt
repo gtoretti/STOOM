@@ -97,7 +97,9 @@ curl -X DELETE http://localhost:8080/address/#{id}
 Additional reference: 
 
 Pagination: https://www.baeldung.com/spring-data-jpa-pagination-sorting
-SOLID: https://en.wikipedia.org/wiki/SOLID
+Unit Testing: https://spring.io/guides/gs/testing-web/
 
+SOLID: https://en.wikipedia.org/wiki/SOLID
+Clean Architecture: https://www.baeldung.com/spring-boot-clean-architecture
 
 
