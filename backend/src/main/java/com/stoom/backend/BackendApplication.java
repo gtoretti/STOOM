@@ -1,26 +1,16 @@
 package com.stoom.backend;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stoom.backend.entity.Address;
+import com.stoom.backend.service.AddressService;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.kafka.clients.admin.NewTopic;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.task.SimpleAsyncTaskExecutor;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.context.annotation.Bean;
-
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaOperations;
-import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
-import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
-import org.springframework.kafka.support.converter.RecordMessageConverter;
-import org.springframework.kafka.support.converter.StringJsonMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.stoom.backend.service.AddressService;
-import com.stoom.backend.entity.Address;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -30,7 +20,7 @@ public class BackendApplication {
 	}
 
 	private final Logger logger = LoggerFactory.getLogger(BackendApplication.class);
-	
+
     @Autowired
     private AddressService addressService;
 	
