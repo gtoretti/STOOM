@@ -88,18 +88,24 @@ Delete by id test:
 
 curl -X DELETE http://localhost:8080/address/#{id}
 
-
+-----------------------------------------------------------------------------------
   
 
 
 
+Additional useful reference:
 
-Additional reference: 
-
-Pagination: https://www.baeldung.com/spring-data-jpa-pagination-sorting
+SpringBoot Pagination: https://www.baeldung.com/spring-data-jpa-pagination-sorting
 Unit Testing: https://spring.io/guides/gs/testing-web/
 
 SOLID: https://en.wikipedia.org/wiki/SOLID
 Clean Architecture: https://www.baeldung.com/spring-boot-clean-architecture
+
+Java Useful links:
+https://www.javatpoint.com/java-8-features
+https://www.javatpoint.com/java-8-stream
+https://www.baeldung.com/new-java-9
+https://www.baeldung.com/java-10-overview
+https://www.baeldung.com/java-11-new-features
 
 
